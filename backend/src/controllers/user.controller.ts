@@ -1,30 +1,33 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { UserService } from "../services/user.service";
+import { pool } from "../db/db";
 
-export async function registerUser(req: Request, res: Response) {
-  const { username, email, password, location } = req.body;
+export async function getProfile(req: Request, res: Response) {
+  const userId = (req as any).user.userId;
 
-  try {
-    const user = await UserService.register(username, email, password, location);
-    res.status(201).json({ message: "User registered", userId: user.id });
-  } catch (err: any) {
-    res.status(400).json({ error: err.message });
-  }
+  const result = await UserService.getProfileData(userId);
+
+  res.json(result.rows[0]);
 }
 
-export async function loginUser(req: Request, res: Response) {
-  const { username, password } = req.body;
+export async function updateLocation(req: Request, res: Response) {
+  const userId = (req as any).user.userId;
+  const { location } = req.body;       
+  try {
+    const updatedUser = await UserService.updateLocation(userId, location);
+    res.json({ message: "Location updated", user: updatedUser });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  } 
+}
 
-  const user = await UserService.findByUsername(username);
-  if (!user) return res.status(404).json({ error: "User not found" });
-
-  const valid = await UserService.validatePassword(password, user.password_hash);
-  if (!valid) return res.status(401).json({ error: "Invalid password" });
-
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-    expiresIn: "1h"
-  });
-
-  res.json({ token });
+export async function updateUsername(req: Request, res: Response) {
+  const userId = (req as any).user.userId;
+  const { username } = req.body;    
+  try {
+    const updatedUser = await UserService.updateUsername(userId, username);
+    res.json({ message: "Username updated", user: updatedUser });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }   
 }
