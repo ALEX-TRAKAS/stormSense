@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
-import { pool } from "../db/db";
 
 export async function getProfile(req: Request, res: Response) {
   const userId = (req as any).user.userId;
