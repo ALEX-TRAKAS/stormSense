@@ -1,39 +1,24 @@
-import axios from "axios";
 import { Request, Response } from "express";
-import { WeatherCache } from "../services/weatherCache.service";
-import { pool } from "../db/db";
+import { WeatherService } from "../services/weather.service";
 
 export async function getWeather(req: Request, res: Response) {
-  const location = req.query.location as string;
+  try {
+    const location = req.query.location as string;
+    const lat = req.query.lat ? Number(req.query.lat) : undefined;
+    const lon = req.query.lon ? Number(req.query.lon) : undefined;
 
-  const cached = await WeatherCache.get(location);
-  if (cached) return res.json({ source: "cache", ...cached });
-
-  const response = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
-    params: {
-      q: location,
-      appid: process.env.WEATHER_API_KEY,
-      units: "metric"
+    if (!location && (lat === undefined || lon === undefined)) {
+      return res.status(400).json({
+        error: "Provide ?location=city or ?lat=x&lon=y"
+      });
     }
-  });
 
-  const data = response.data;
+    const result = await WeatherService.getWeather(lat, lon, location);
 
- 
-  await WeatherCache.set(location, data);
+    res.json(result);
 
-  
-  await pool.query(
-    `INSERT INTO weather_history (location, temperature, humidity, wind, data)
-     VALUES ($1,$2,$3,$4,$5)`,
-    [
-      location,
-      data.main.temp,
-      data.main.humidity,
-      data.wind.speed,
-      data
-    ]
-  );
-
-  res.json({ source: "api", ...data });
+  } catch (error: any) {
+    console.error("Weather error:", error);
+    res.status(500).json({ error: error.message || "Failed to fetch weather" });
+  }
 }
