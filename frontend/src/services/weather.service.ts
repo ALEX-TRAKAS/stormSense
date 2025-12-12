@@ -36,8 +36,10 @@ export async function getWeather(params: {
   if (params.lat !== undefined) query.lat = params.lat;
   if (params.lon !== undefined) query.lon = params.lon;
 
-  const res = await axios.get<WeatherResult>("http://localhost:3000/weather", { params: query });
+  const res = await axios.get<WeatherResult>("http://localhost:3000/api/weather", { params: query });
   console.log("http://localhost:3000/weather", { params: query });
   return res.data;
 }
+
+
 

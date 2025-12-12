@@ -1,0 +1,86 @@
+import React, { useState } from "react";
+import Header from "../components/header";
+import MapView from "../components/mapView";
+import WeatherCard from "../components/weatherCard";
+import { getWeather } from "../services/weather.service";
+import type { WeatherResult } from "../services/weather.service";
+
+export default function Home() {
+  const [query, setQuery] = useState("");
+  const [weather, setWeather] = useState<WeatherResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  
+  const fetchWeather = async (city?: string, lat?: number, lon?: number) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const data = await getWeather({ city, lat, lon });
+      setWeather(data);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to fetch weather");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query) return;
+    fetchWeather(query);
+  };
+
+  const handleMapSelect = (lat: number, lon: number) => {
+    fetchWeather(undefined, lat, lon);
+  };
+
+  return (
+    <>
+      
+      <Header />
+      <main className="p-6">
+        <h1 className="text-3xl font-bold mb-4">Weather Map</h1>
+
+     
+        <form
+          onSubmit={handleSearch}
+          className="flex gap-2 mb-6 items-center max-w-md"
+        >
+          <input
+            className="border rounded px-3 py-2 w-full"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by city…"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Search
+          </button>
+        </form>
+
+    
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+         
+          <div className="md:col-span-2">
+            <MapView
+              onSelect={handleMapSelect}
+              weather={weather?.weather ?? null}
+            />
+          </div>
+
+          <div>
+            <WeatherCard
+              weather={weather?.weather ?? null}
+              loading={loading}
+              error={error}
+            />
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}

@@ -3,14 +3,16 @@ import { errorHandler } from './middlewares/errorHandler';
 import userRoutes from "./routes/user.routes";
 import weatherRoutes from "./routes/weather.routes";
 import { auth } from './middlewares/auth';
+import cors from "cors";
+
 
 
 const app = express();
-
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 
-app.use("/user", auth, userRoutes);
-app.use("/weather", weatherRoutes);
+app.use("/api/user", auth, userRoutes);
+app.use("/api/weather", weatherRoutes);
 
 app.use(errorHandler);
 
