@@ -5,24 +5,111 @@
 --accent:#3ea3ff;
 }
 *{box-sizing:border-box}
-body,html,#root{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
-body{background:linear-gradient(180deg,#071028 0%, #071b2a 100%);color:#e6eef6}
-.app-root{display:flex;flex-direction:column;min-height:100vh}
-.app-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(0,0,0,0.12)}
-.search-form{display:flex;gap:8px}
-.search-form input{padding:8px 12px;border-radius:8px;border:1px solid #233245;background:transparent;color:inherit}
-.search-form button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#04263b}
-.main-grid{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:16px}
-.map-column{height:calc(100vh - 180px)}
-.side-column{display:flex;flex-direction:column;gap:12px}
-.card{background:rgba(255,255,255,0.04);padding:12px;border-radius:10px}
-.card.error{border:1px solid #ff6b6b}
-.row{margin-top:8px}
-.raw{max-height:180px;overflow:auto;background:#071826;padding:8px;border-radius:6px}
-.tips{color:var(--muted);font-size:14px}
-.app-footer{text-align:center;padding:12px;color:var(--muted);margin-top:auto}
+body,
+html,
+#root {
+	height: 100%;
+	margin: 0;
+	font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial
+}
 
-/* Mobile layout */
+body {
+	background: linear-gradient(180deg, #071028 0%, #071b2a 100%);
+	color: #e6eef6
+}
+
+.app-root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh
+}
+
+.app-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+	background: rgba(0, 0, 0, 0.12)
+}
+
+.search-form {
+	display: flex;
+	gap: 8px
+}
+
+.search-form input {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid #233245;
+	background: transparent;
+	color: inherit
+}
+
+.search-form button {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: none;
+	background: var(--accent);
+	color: #04263b
+}
+
+.main-grid {
+	display: grid;
+	grid-template-columns: 1fr 320px;
+	gap: 16px;
+	padding: 16px
+}
+
+.map-column {
+	height: calc(100vh - 180px)
+}
+
+.side-column {
+	display: flex;
+	flex-direction: column;
+	gap: 12px
+}
+
+.card {
+	background: rgba(255, 255, 255, 0.04);
+	padding: 12px;
+	border-radius: 10px
+}
+
+.card.error {
+	border: 1px solid #ff6b6b
+}
+
+.row {
+	margin-top: 8px
+}
+
+.raw {
+	max-height: 180px;
+	overflow: auto;
+	background: #071826;
+	padding: 8px;
+	border-radius: 6px
+}
+
+.tips {
+	color: var(--muted);
+	font-size: 14px
+}
+.app-footer{
+  text-align:center;
+  padding:12px;
+  color:var(--muted);
+  margin-top:auto
+}
+.page-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 @media (max-width: 768px) {
   .main-grid {
     grid-template-columns: 1fr; 

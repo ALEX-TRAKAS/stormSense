@@ -9,17 +9,19 @@ export type AuthResponse = {
   };
 };
 
-export async function login(email: string, password: string): Promise<AuthResponse> {
+export async function login(username: string, password: string): Promise<AuthResponse> {
+  console.log("Logging in with", { username, password });
   const res = await axios.post<AuthResponse>("http://localhost:3000/user/login", {
-    email,
+    username,
     password,
   });
   return res.data;
 }
 
-export async function signup(name: string, email: string, password: string): Promise<AuthResponse> {
+export async function signup(username: string, email: string, password: string): Promise<AuthResponse> {
+  console.log("Signing up with", { username, email });
   const res = await axios.post<AuthResponse>("http://localhost:3000/user/register", {
-    name,
+    username,
     email,
     password,
   });

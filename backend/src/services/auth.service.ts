@@ -2,7 +2,7 @@ import { pool } from "../db/db";
 import bcrypt from "bcrypt";
 
 export const AuthService = {
-  async register(username: string, email: string, password: string, location?: string) {
+  async register(username: string, email: string, password: string, location?: "") {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const result = await pool.query(

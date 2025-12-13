@@ -3,8 +3,13 @@
 
   type AuthFormProps = {
     mode: "login" | "signup";
-    onSubmit: (data: { name?: string; email: string; password: string }) => Promise<void>;
-  };
+    onSubmit: (data: {
+      name?: string;
+      email?: string;
+      username?: string;
+      password: string;
+    }) => Promise<void>;
+};
 
   export default function AuthForm({ mode, onSubmit }: AuthFormProps) {
     const navigate = useNavigate();
@@ -15,24 +20,41 @@
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [loaded, setLoaded] = useState(false);
+    const [username, setUsername] = useState("");
+
+    
 
     useEffect(() => {
       setLoaded(true);
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setError("");
-      setLoading(true);
-      try {
-        await onSubmit({ name, email, password });
-        navigate("/");
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : "Submission failed");
-      } finally {
-        setLoading(false);
-      }
-    };
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+
+  try {
+    if (mode === "login") {
+      await onSubmit({
+        username,
+        password,
+      });
+    } else {
+      await onSubmit({
+        name,
+        email,
+        password,
+      });
+    }
+
+    navigate("/");
+  } catch (err: unknown) {
+    setError(err instanceof Error ? err.message : "Submission failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     const styles: { [key: string]: React.CSSProperties } = {
       container: {
@@ -125,25 +147,38 @@
 
             {error && <p style={styles.error}>{error}</p>}
 
-            {mode === "signup" && (
+          {mode === "signup" && (
+              <>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  style={styles.input}
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={styles.input}
+                  required
+                />
+              </>
+            )}
+
+            {mode === "login" && (
               <input
                 type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 style={styles.input}
                 required
               />
             )}
-
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={styles.input}
-              required
-            />
 
             <div style={styles.passwordWrapper}>
               <input

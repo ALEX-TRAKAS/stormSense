@@ -40,10 +40,8 @@ export default function Home() {
     <>
       
       <Header />
-      <main className="p-6">
-        <h1 className="text-3xl font-bold mb-4">Weather Map</h1>
-
-     
+      <div className="page-center">
+   <main className="p-6 max-w-6xl mx-auto">
         <form
           onSubmit={handleSearch}
           className="flex gap-2 mb-6 items-center max-w-md"
@@ -81,6 +79,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      </div>
     </>
   );
 }
