@@ -19,6 +19,7 @@ export class WeatherService {
   }
 
   static async fetchWeather(lat: number, lon: number) {
+    console.log(`Fetching weather for lat: ${lat}, lon: ${lon}`);
     const weatherRes = await axios.get("https://api.open-meteo.com/v1/forecast", {
       params: {
         latitude: lat,

@@ -61,8 +61,10 @@ body {
 }
 
 .map-column {
-	height: calc(100vh - 180px)
+  height: calc(100vh - 180px);
+  min-height: 400px;
 }
+
 
 .side-column {
 	display: flex;
@@ -108,6 +110,12 @@ body {
   justify-content: center;
   align-items: center;
 }
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
 
 
 @media (max-width: 768px) {

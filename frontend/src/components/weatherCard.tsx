@@ -11,8 +11,8 @@ return (
 <div className="card">
 {/* <h2>{weather.location}</h2>
 <div className="row"><strong>{weather.temp}°C</strong></div>
-<div className="row">Humidity: {weather.humidity}%</div>
-<div className="row">Wind: {weather.wind} m/s</div> */}
+<div className="row">Humidity: {weather.humidity}%</div>*/}
+{/* <div className="row">Wind: {weather.windspeed} m/s</div>  */}
 <details>
 <summary>Raw data</summary>
 <pre className="raw">{JSON.stringify(weather, null, 2)}</pre>
