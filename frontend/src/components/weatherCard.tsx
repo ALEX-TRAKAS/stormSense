@@ -8,11 +8,13 @@ if (!weather) return <div className="card">No weather selected — search or cli
 
 
 return (
+    
 <div className="card">
-{/* <h2>{weather.location}</h2>
-<div className="row"><strong>{weather.temp}°C</strong></div>
-<div className="row">Humidity: {weather.humidity}%</div>*/}
-{/* <div className="row">Wind: {weather.windspeed} m/s</div>  */}
+{/* <h2>{weather}</h2> */}
+<div className="row"><strong>{weather.current_weather.temperature}°C</strong></div>
+<div className="row">Wind direction: {weather.current_weather.winddirection} °</div>
+<div className="row">Wind: {weather.current_weather.windspeed} Km/s</div>  
+
 <details>
 <summary>Raw data</summary>
 <pre className="raw">{JSON.stringify(weather, null, 2)}</pre>

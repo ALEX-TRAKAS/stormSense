@@ -10,6 +10,7 @@ export type CurrentWeather = {
 };
 
 export type WeatherData = {
+  location?: string;
   latitude: number;
   longitude: number;
   generationtime_ms?: number;

@@ -38,31 +38,27 @@ export default function Home() {
 
   return (
     <>
-      
       <Header />
       <div className="page-center">
-   <main className="p-6 max-w-6xl mx-auto">
-        <form
-          onSubmit={handleSearch}
-          className="flex gap-2 mb-6 items-center max-w-md"
-        >
-          <input
-            className="border rounded px-3 py-2 w-full"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by city…"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded"
-          >
-            Search
-          </button>
-        </form>
-
-    
+        <main className="p-6 max-w-6xl mx-auto">
+          <form
+            onSubmit={handleSearch}
+            className="flex gap-2 mb-6 items-center max-w-md">
+            <div className="search">
+              <input  value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search by city…"type="text"/> 
+              <button type="submit">Search</button>
+            </div>
+          </form>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-         
+           <div>
+            <WeatherCard
+              weather={weather?.weather ?? null}
+              loading={loading}
+              error={error}
+            />
+          </div>
           <div className="md:col-span-2">
             <MapView
               onSelect={handleMapSelect}
@@ -70,13 +66,7 @@ export default function Home() {
             />
           </div>
 
-          <div>
-            <WeatherCard
-              weather={weather?.weather ?? null}
-              loading={loading}
-              error={error}
-            />
-          </div>
+        
         </div>
       </main>
       </div>

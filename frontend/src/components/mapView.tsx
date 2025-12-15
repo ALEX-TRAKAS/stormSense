@@ -6,8 +6,8 @@ import "leaflet/dist/leaflet.css";
 
 
 
-  let latitude: number;
-  let longitude: number;
+let latitude: number;
+let longitude: number;
 
 const markerIcon = new L.Icon({
 iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
