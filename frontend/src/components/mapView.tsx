@@ -42,7 +42,7 @@ export default function MapView({
     ? [weather.latitude, weather.longitude]
     : [51.505, -0.09];
   return (
-    <MapContainer center={center} zoom={6} style={{ height: "100%", minHeight: 500, width: "500px"}}>
+    <MapContainer center={center} zoom={6} style={{ height: "100%", minHeight:500, minWidth:1000, width: "500px"}}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -53,8 +53,8 @@ export default function MapView({
         <Marker position={[latitude, longitude]} icon={markerIcon}>
           <Popup>
             <div>
-              <strong>Temp: {weather.current_weather.temperature}°C</strong>
-              <div>Wind: {weather.current_weather.windspeed} m/s</div>
+              <strong>Temp: {weather.current.temperature_2m}°C</strong>
+              <div>Wind: {weather.current.wind_speed_10m} m/s</div>
             </div>
           </Popup>
         </Marker>

@@ -1,12 +1,19 @@
 import axios from "axios";
 
-
 export type CurrentWeather = {
-  temperature: number;
-  windspeed: number;
-  winddirection: number;
-  weathercode: number;
   time: string;
+  temperature_2m: number;
+  apparent_temperature: number;
+  relative_humidity_2m: number;
+  is_day: number;
+  weather_code: number;
+  cloud_cover: number;
+  wind_speed_10m: number;
+  wind_direction_10m: number;
+  precipitation: number;
+  rain: number;
+  showers: number;
+  snowfall: number;
 };
 
 export type WeatherData = {
@@ -18,7 +25,8 @@ export type WeatherData = {
   timezone?: string;
   timezone_abbreviation?: string;
   elevation?: number;
-  current_weather: CurrentWeather;
+
+  current: CurrentWeather;
 };
 
 export type WeatherResult = {
@@ -37,12 +45,12 @@ export async function getWeather(params: {
   if (params.lat !== undefined) query.lat = params.lat;
   if (params.lon !== undefined) query.lon = params.lon;
 
-  const res = await axios.get<WeatherResult>("http://localhost:3000/api/weather", { params: query });
+  const res = await axios.get<WeatherResult>(
+    "http://localhost:3000/api/weather",
+    { params: query }
+  );
   //remove all console logs below before final submission
   console.log("http://localhost:3000/weather", { params: query });
-  console.log("Weather response:", res.data); 
+  console.log("Weather response:", res.data);
   return res.data;
 }
-
-
-

@@ -72,6 +72,7 @@ body {
 .map-column {
   height: calc(100vh - 180px);
   min-height: 400px;
+  
 }
 
 
