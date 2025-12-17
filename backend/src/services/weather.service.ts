@@ -66,10 +66,12 @@ export class WeatherService {
   }
 
   static async getWeather(lat?: number, lon?: number, location?: string) {
-    const cacheKey = location || `${lat},${lon}`;
+    const cacheKey = location || `${lat?.toPrecision(4)},${lon?.toPrecision(4)}`;
 
     const cached = await WeatherCache.get(cacheKey);
-    if (cached) return { source: "cache", weather: cached };
+    if (cached){
+      console.log("Returning cached weather for:", cacheKey);
+      return { source: "cache", weather: cached };}
 
     let coords = { lat, lon };
 

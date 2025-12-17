@@ -59,7 +59,7 @@ export default function Home() {
               error={error}
             />
           </div>
-          <div className="md:col-span-2">
+          <div className="map-container md:col-span-2">
             <MapView
               onSelect={handleMapSelect}
               weather={weather?.weather ?? null}

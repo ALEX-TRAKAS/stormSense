@@ -40,7 +40,7 @@ export default function MapView({
 }) {
   const center: [number, number] = weather
     ? [weather.latitude, weather.longitude]
-    : [51.505, -0.09];
+    : [38.77,24.09];
   return (
     <MapContainer center={center} zoom={6} style={{ height: "100%", minHeight:500, minWidth:1000, width: "500px"}}>
       <TileLayer

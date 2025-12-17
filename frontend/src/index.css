@@ -82,18 +82,7 @@ body {
 	gap: 12px
 }
 
-.card {
-	background: rgb(243, 241, 241);
-	padding: 12px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border-radius: 10px
-}
-
-.card.error {
-	border: 1px solid #ff6b6b
-}
-
+            
 .row {
 	margin-top: 8px
 }

@@ -3,6 +3,7 @@ import { redis } from "../db/redis";
 export class CacheService {
 
   static async set(key: string, value: unknown, ttl = 3600): Promise<void> {
+    console.log("Setting cache:", key, value, ttl);
     await redis.set(key, JSON.stringify(value), "EX", ttl);
   }
 
