@@ -1,5 +1,5 @@
 import type { WeatherData } from "../services/weather.service";
-import { formatDate } from "../utils/formatdate";
+import { formatDate } from "../utils/formatDate";
 import "../styles/weatherCardStyle.css";
 
 export default function WeatherCard({

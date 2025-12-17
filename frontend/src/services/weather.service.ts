@@ -46,11 +46,8 @@ export async function getWeather(params: {
   if (params.lon !== undefined) query.lon = params.lon;
 
   const res = await axios.get<WeatherResult>(
-    "http://localhost:3000/api/weather",
+    "http://192.168.1.7:3000/api/weather", //change before production
     { params: query }
   );
-  //remove all console logs below before final submission
-  console.log("http://localhost:3000/weather", { params: query });
-  console.log("Weather response:", res.data);
   return res.data;
 }

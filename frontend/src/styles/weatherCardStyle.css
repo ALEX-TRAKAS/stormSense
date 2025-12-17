@@ -78,19 +78,15 @@
   color: rgba(87, 77, 51, 0.66);
 }
 
-@media (max-width: 768px) {
+
   @media (max-width: 480px) {
   .card {
-    width: 100%;
+    width: 200px;
     max-width: 320px;
     height: auto;
     padding: 16px;
     border-radius: 18px;
     transition: transform 0.3s ease;
-  }
-
-  .card:hover {
-    transform: none; /* hover doesn’t make sense on mobile */
   }
 
   .container {
@@ -129,4 +125,3 @@
 }
 
 
-}
