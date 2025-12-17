@@ -28,39 +28,6 @@ export default function Header() {
           }}
         />
       </Link>
-      <nav style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-        <Link to="/login">
-          <button
-            style={{
-              padding: "8px 16px",
-              borderRadius: "8px",
-              background: "#e6e6e6",
-              color:  "#222",
-              border: "1px solid #888",
-              cursor: "pointer",
-              transition: "0.2s",
-            }}
-          >
-            Login
-          </button>
-        </Link>
-
-        <Link to="/signup">
-          <button
-            style={{
-              padding: "8px 16px",
-              borderRadius: "8px",
-              background: "#2563eb" ,
-              color: "#fff",
-              border: "none",
-              cursor: "pointer",
-              transition: "0.2s",
-            }}
-          >
-            Sign Up
-          </button>
-        </Link>
-      </nav>
     </header>
   );
 }
